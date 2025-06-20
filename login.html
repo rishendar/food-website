@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+    <div class="login-container d-flex justify-content-center align-items-center vh-100">
+        <div class="card login-card p-4">
+            <div class="text-center mb-4">
+                <img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" alt="Food Munch Logo" class="login-logo" />
+            </div>
+            <h4 class="text-center mb-3">Login to Food Munch</h4>
+            <form onsubmit="return handleLogin()">
+                <div class="form-group">
+                    <label for="username">Email or Username</label>
+                    <input type="text" class="form-control" id="username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" required />
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" />
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+                <button type="submit" class="btn btn-warning btn-block mt-2">Login</button>
+                <div class="text-center mt-3">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <p class="text-center mt-2">
+                    Don't have an account? <a href="#">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            if (rememberMe) {
+                // Save username in localStorage
+                localStorage.setItem('username', username);
+            } else {
+                localStorage.removeItem('username');
+            }
+
+            // Redirect to your main site
+            window.location.href = "index.html"; // your homepage file
+            return false; // prevent form submit
+        }
+
+        // Auto-fill username if remembered
+        window.onload = function() {
+            const savedUsername = localStorage.getItem('username');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+                document.getElementById('rememberMe').checked = true;
+            }
+        };
+    </script>
+</body>
+
+</html>
